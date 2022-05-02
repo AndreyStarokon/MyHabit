@@ -166,6 +166,7 @@ extension HabitViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard HabitsStore.shared.habits.indices.contains(indexPath.item) else { return }
+        if indexPath.section > 0 {
         let vc = HabitDetailViewController()
         vc.editCompletion = { [weak self] in
             self?.collectionView.reloadSections(IndexSet(integer: 1))
@@ -174,5 +175,6 @@ extension HabitViewController: UICollectionViewDelegateFlowLayout {
         let habit = HabitsStore.shared.habits[indexPath.item]
         vc.configure(with: habit)
         navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

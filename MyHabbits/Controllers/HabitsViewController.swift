@@ -61,7 +61,7 @@ class HabitsViewController: UIViewController {
         let titleTextField = UITextField()
         
         titleTextField.toAutoLayout()
-        titleTextField.placeholder = "введите название привычки"
+        titleTextField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
         titleTextField.textColor = habitColor
         titleTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         titleTextField.addTarget(self, action: #selector(textFieldEditindDidBegin(_:)), for: .editingDidBegin)
@@ -193,16 +193,16 @@ class HabitsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        let nc = NotificationCenter.default
+        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     
@@ -238,6 +238,7 @@ class HabitsViewController: UIViewController {
     
     @objc private func textFieldEditindDidBegin(_ sender: Any) {
         titleTextField.font = StyleStuct.Font.body
+        
     }
     
     @objc private func textFieldEditingDidEnd(_ sender: Any) {
@@ -303,7 +304,7 @@ class HabitsViewController: UIViewController {
             
             titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: StyleStuct.Spacing.small),
             titleTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            titleTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -StyleStuct.Margin.normal),
             
             colorLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: StyleStuct.Spacing.large),
             colorLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),

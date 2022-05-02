@@ -26,6 +26,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
             guard let streakText = streakText() else { return }
             habitRepeatLabel.text = streakText
+            
         }
     }
     
@@ -170,6 +171,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(constraints)
     }
     
+    
     @objc private func tapTick(_ sender: Any) {
         
         guard !isTracked else { return }
@@ -190,5 +192,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
         habitRepeatLabel.setText(streakText, animated: true)
 
         trackCompletion?()
+        
     }
 }

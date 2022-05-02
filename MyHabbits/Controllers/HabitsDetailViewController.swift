@@ -71,6 +71,7 @@ class HabitDetailViewController: UIViewController {
             guard let self = self else { return }
             
             self.title = habit.name
+            
             if let editCompletion = self.editCompletion {
                 editCompletion()
             }
