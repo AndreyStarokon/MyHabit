@@ -8,8 +8,9 @@
 import UIKit
 
 class HabitDetailViewController: UIViewController {
+    weak var delegate:HabitsViewController?
     
-    private var habit: Habit?
+    var habit: Habit?
     var editCompletion: (() -> Void)?
     
     private lazy var tableView: UITableView = {
@@ -65,6 +66,7 @@ class HabitDetailViewController: UIViewController {
     @objc private func editHabit(_ sender: Any) {
         guard let habit = habit else { return }
         let habitVc = HabitsViewController()
+        habitVc.timePicker.date = habit.date
         habitVc.configure(with: habit)
         habitVc.completion = { [weak self] in
             

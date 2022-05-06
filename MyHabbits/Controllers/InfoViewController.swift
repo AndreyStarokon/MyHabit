@@ -24,7 +24,6 @@ class InfoViewController: UIViewController {
        let text = UILabel()
         text.textColor = .black
         text.translatesAutoresizingMaskIntoConstraints = false
-       // text.font = UIFont.preferredFont(forTextStyle: .body)
         text.font = StyleStuct.Font.title3
         text.text = "Привычка за 21 день"
         
@@ -52,7 +51,6 @@ class InfoViewController: UIViewController {
 
         Источник: psychbook.ru
         """
-        text.addInterlineSpacing(spacingValue: 1.5)
         text.textColor = .black
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = StyleStuct.Font.body
@@ -97,7 +95,7 @@ class InfoViewController: UIViewController {
         textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
         textView.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 8),
         textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-        textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8)
+        textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
         
         NSLayoutConstraint.activate([

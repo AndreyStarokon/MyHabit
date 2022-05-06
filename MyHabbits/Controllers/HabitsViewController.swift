@@ -19,7 +19,8 @@ class HabitsViewController: UIViewController {
             titleTextField.textColor = habitColor
         }
     }
-    private var habitTime: Date? {
+    
+     var habitTime: Date? {
         didSet {
             
             guard let habitTime = habitTime else { return }
@@ -29,7 +30,7 @@ class HabitsViewController: UIViewController {
             formatter.dateStyle = .none
             formatter.timeStyle = .short
 
-            timeIndicatorLabel.text = formatter.string(from: habitTime)
+            timeIndicatorLabel.text = formatter.string(from: habit?.date ?? habitTime)
         }
     }
     
@@ -122,7 +123,7 @@ class HabitsViewController: UIViewController {
         return timeIndicatorLabel
     }()
     
-    private lazy var timePicker: UIDatePicker = {
+   lazy var timePicker: UIDatePicker = {
         let timePicker = UIDatePicker()
         
         timePicker.toAutoLayout()
@@ -132,7 +133,6 @@ class HabitsViewController: UIViewController {
         
         timePicker.addTarget(self, action: #selector(pickerSet(sender:)), for: .valueChanged)
         
-        setTime(from: timePicker)
         
         return timePicker
     }()
@@ -357,10 +357,10 @@ class HabitsViewController: UIViewController {
         self.setTime(from: sender)
     }
     
-    private func setTime(from datePicker: UIDatePicker) {
-        habitTime = datePicker.date
-    }
-    
+     func setTime(from timePicker: UIDatePicker) {
+         
+                habitTime = timePicker.date
+     }
     @objc private func saveHabit(_ sender: Any) {
         
         guard let habitTitle = habitTitle,
@@ -388,7 +388,7 @@ class HabitsViewController: UIViewController {
                 return
             }
             
-            if(oldHabit != newHabit) {
+            if  oldHabit != newHabit {
                 oldHabit.name = habitTitle
                 oldHabit.date = habitTime
                 oldHabit.color = habitColor
@@ -397,8 +397,11 @@ class HabitsViewController: UIViewController {
         }
         
         self.close(sender)
+        
     }
-    
+   
+        
+        
     @objc private func deleteHabit(_ sender: Any) {
         guard let habit = habit else { return }
         let alertVC = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку \"\(habit.name)\"?", preferredStyle: .alert)
@@ -432,6 +435,7 @@ class HabitsViewController: UIViewController {
         guard let textField = sender as? UITextField else { return }
         habitTitle = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+   
 }
 
 extension HabitsViewController: UIColorPickerViewControllerDelegate {
@@ -439,3 +443,5 @@ extension HabitsViewController: UIColorPickerViewControllerDelegate {
         habitColor = viewController.selectedColor
     }
 }
+
+
